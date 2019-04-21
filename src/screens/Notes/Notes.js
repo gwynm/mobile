@@ -22,6 +22,7 @@ import LockedView from "@Containers/LockedView"
 import ApplicationState from "@Lib/ApplicationState"
 import Icon from 'react-native-vector-icons/Ionicons';
 import FAB from 'react-native-fab';
+import { EventRegister } from 'react-native-event-listeners';
 
 export default class Notes extends Abstract {
 
@@ -123,6 +124,21 @@ export default class Notes extends Abstract {
     this.forceUpdate();
   }
 
+  componentWillMount() {
+
+    //Swipe listener
+    this.listener = EventRegister.addEventListener('actSwitchNote', (data) => {
+        var index = this.state.notes.map((n) => n.uuid).indexOf(this.state.selectedNoteId);
+        index += data;
+        if (index < 0) {index=0}
+        if (index >= this.state.notes.length) { index = this.state.notes.length - 1}
+        var chosen_note = this.state.notes[index];
+
+        this.props.navigation.pop(); // Makes history for eg back button work right
+        this.selectNote(chosen_note,true);
+    })
+  }
+
   componentWillUnmount() {
     super.componentWillUnmount();
 
@@ -132,6 +148,7 @@ export default class Notes extends Abstract {
     if(this.options) {
       this.options.removeChangeObserver(this.optionsObserver);
     }
+    EventRegister.removeEventListener(this.listener)
   }
 
   registerObservers() {

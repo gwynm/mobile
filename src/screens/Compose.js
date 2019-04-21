@@ -16,6 +16,7 @@ import { SafeAreaView } from 'react-navigation';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import TextView from "sn-textview";
+import { EventRegister } from 'react-native-event-listeners';
 
 import {
   StyleSheet,
@@ -461,8 +462,10 @@ export default class Compose extends Abstract {
     const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
     if (gestureName == SWIPE_LEFT) {
       console.log("Swipe left");
+      EventRegister.emit('actSwitchNote', -1);
     } else if (gestureName == SWIPE_RIGHT) {
       console.log("Swipe right");
+      EventRegister.emit('actSwitchNote', 1);
     }
   }
 
