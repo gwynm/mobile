@@ -29,6 +29,13 @@ import {
 
 import StyleKit from "@Style/StyleKit"
 
+/* Todo: Move this somewhere sensible */
+Number.prototype.pad = function(size) {
+  var s = String(this);
+  while (s.length < (size || 2)) {s = "0" + s;}
+  return s;
+}
+
 export default class Compose extends Abstract {
 
   static navigationOptions = ({ navigation, navigationOptions }) => {
@@ -164,6 +171,7 @@ export default class Compose extends Abstract {
       }
       note = ModelManager.get().createItem({content_type: "Note", dummy: true, text: ""});
       note.dummy = true;
+      note.title = this.defaultNoteTitle();
       // Editors need a valid note with uuid and modelmanager mapped in order to interact with it
       // Note that this can create dummy notes that aren't deleted automatically.
       // Also useful to keep right menu enabled at all times. If the note has a uuid and is a dummy,
@@ -180,6 +188,11 @@ export default class Compose extends Abstract {
       this.setState({title: note.title});
       this.forceUpdate();
     }
+  }
+
+  defaultNoteTitle() {
+    var d = new Date();
+    return d.getFullYear() + "-" + d.getMonth().pad(2) + "-" + d.getDate().pad(2) + " ";
   }
 
   configureHeaderBar() {
