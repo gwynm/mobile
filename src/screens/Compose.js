@@ -360,16 +360,16 @@ export default class Compose extends Abstract {
   }
 
   showSavingStatus() {
-    this.setSubTitle("Saving...");
+    this.setSubTitle("");
   }
 
   showSavedStatus(success) {
     if(success) {
       if(this.statusTimeout) clearTimeout(this.statusTimeout);
       this.statusTimeout = setTimeout(() => {
-        var status = "All changes saved"
+        var status = ""
         if(Auth.get().offline()) {
-          status += " (offline)";
+          status += "";
         }
         this.saveError = false;
         this.syncTakingTooLong = false;
