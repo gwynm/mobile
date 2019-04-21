@@ -13,6 +13,7 @@ import ApplicationState from "@Lib/ApplicationState"
 import LockedView from "@Containers/LockedView";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-navigation';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import TextView from "sn-textview";
 
@@ -456,6 +457,15 @@ export default class Compose extends Abstract {
     this.forceUpdate();
   }
 
+  onSwipe(gestureName, gestureState) {
+    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
+    if (gestureName == SWIPE_LEFT) {
+      console.log("Swipe left");
+    } else if (gestureName == SWIPE_RIGHT) {
+      console.log("Swipe right");
+    }
+  }
+
   render() {
     if(this.state.lockContent) {
       return (<LockedView />);
@@ -496,20 +506,22 @@ export default class Compose extends Abstract {
             </TouchableOpacity>
           </View>
         }
+        <GestureRecognizer style={[this.styles.noteTitleGestureRecognizer]} onSwipe={(direction, state) => this.onSwipe(direction, state)}>
+          <TextInput
+            style={this.styles.noteTitle}
+            onChangeText={this.onTitleChange}
+            value={this.state.title}
+            placeholder={"Add Title"}
+            selectionColor={StyleKit.variable("stylekitInfoColor")}
+            underlineColorAndroid={'transparent'}
+            placeholderTextColor={StyleKit.variable("stylekitNeutralColor")}
+            keyboardAppearance={StyleKit.get().keyboardColorForActiveTheme()}
+            autoCorrect={true}
+            autoCapitalize={'sentences'}
+            editable={!this.note.locked}
+          />
+        </GestureRecognizer>
 
-        <TextInput
-          style={this.styles.noteTitle}
-          onChangeText={this.onTitleChange}
-          value={this.state.title}
-          placeholder={"Add Title"}
-          selectionColor={StyleKit.variable("stylekitInfoColor")}
-          underlineColorAndroid={'transparent'}
-          placeholderTextColor={StyleKit.variable("stylekitNeutralColor")}
-          keyboardAppearance={StyleKit.get().keyboardColorForActiveTheme()}
-          autoCorrect={true}
-          autoCapitalize={'sentences'}
-          editable={!this.note.locked}
-        />
 
         {this.state.loadingWebView &&
           <View style={[this.styles.loadingWebViewContainer]}>
@@ -535,16 +547,16 @@ export default class Compose extends Abstract {
         }
 
         {!shouldDisplayEditor && Platform.OS == "android" &&
-          <View style={[this.styles.noteTextContainer]}>
-            <TextView style={[StyleKit.stylesForKey("noteText"), this.styles.textContentAndroid]}
-              ref={(ref) => this.input = ref}
-              autoFocus={this.note.dummy}
-              value={this.note.text}
-              selectionColor={StyleKit.lighten(StyleKit.variable("stylekitInfoColor"), 0.35)}
-              handlesColor={StyleKit.variable("stylekitInfoColor")}
-              onChangeText={this.onTextChange}
-            />
-          </View>
+            <View style={[this.styles.noteTextContainer]}>
+              <TextView style={[StyleKit.stylesForKey("noteText"), this.styles.textContentAndroid]}
+                ref={(ref) => this.input = ref}
+                autoFocus={this.note.dummy}
+                value={this.note.text}
+                selectionColor={StyleKit.lighten(StyleKit.variable("stylekitInfoColor"), 0.35)}
+                handlesColor={StyleKit.variable("stylekitInfoColor")}
+                onChangeText={this.onTextChange}
+              />
+            </View>
         }
 
         {!shouldDisplayEditor && Platform.OS == "ios" &&
@@ -584,6 +596,10 @@ export default class Compose extends Abstract {
         paddingTop: Platform.OS === "ios" ? 5 : 12,
         paddingLeft: padding,
         paddingRight: padding
+      },
+
+      noteTitleGestureRecognizer: {
+        height: noteTitleHeight,
       },
 
       lockedContainer: {
