@@ -1,5 +1,5 @@
 /* This domain will be used to save context item client data */
-let ClientDataDomain = "org.standardnotes.sn.components";
+let ClientDataDomain = "com.gwynmorfey.StandardJournal.sj.components";
 
 import { Platform, Alert } from 'react-native';
 

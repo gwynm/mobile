@@ -26,7 +26,7 @@ import {
   SFPrivilegesManager
 } from 'standard-file-js';
 
-SFItem.AppDomain = "org.standardnotes.sn";
+SFItem.AppDomain = "com.gwynmorfey.StandardJournal.sj";
 
 global.SFItem = SFItem;
 global.SFItemParams = SFItemParams;

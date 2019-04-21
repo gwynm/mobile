@@ -33,7 +33,7 @@ export default class Notes extends Abstract {
     this.registerObservers();
 
     props.navigation.setParams({
-      title: "All notes",
+      title: "All entries",
       leftButton: {
         title: null,
         iconName: StyleKit.nameForIcon("menu"),

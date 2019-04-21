@@ -1,4 +1,4 @@
-package com.standardnotes;
+package com.gwynmorfey.standardjournal;
 
 import android.app.Application;
 import android.app.Activity;
