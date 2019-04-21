@@ -4,6 +4,7 @@ A fork of Standard Notes with some opinionated hacks designed to support journal
 
 - Change package name and app name (allowing both to be installed side-by-side)
 - When creating a new note, default title is the current date
+- Swipe left/right on note title to change notes. (Only on title area, not on body, else it interferes with scrolling)
 
 
 Debugging:
@@ -11,7 +12,7 @@ Debugging:
  - react-native run-android
  - Use RN debugger: https://github.com/jhen0409/react-native-debugger/blob/master/docs/getting-started.md
  - It's not using redux so you don't get the redux debugger
- - Close and relaunch app on android device to see code changes
+ - Shake android device and press Reload to see changes. 
 
 # Standard Notes
 
