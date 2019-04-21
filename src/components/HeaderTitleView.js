@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
-import {DeviceEventEmitter, Modal, View, Text} from 'react-native';
+import {DeviceEventEmitter, Modal, View, Text, Button} from 'react-native';
 import StyleKit from "@Style/StyleKit";
 import PlatformStyles from "../models/PlatformStyles";
+import { EventRegister } from 'react-native-event-listeners';
 
 export default class HeaderTitleView extends Component {
 
   constructor(props) {
     super(props);
+  }
+
+  onPrev() {
+    EventRegister.emit('actSwitchNote', -1);
+  }
+  onNext() {
+    EventRegister.emit('actSwitchNote', 1);
   }
 
   render() {
@@ -21,13 +29,19 @@ export default class HeaderTitleView extends Component {
     return (
       <View style={styles.get('headerContainer')}>
 
-        <Text style={styles.get('headerTitle')}>{this.props.title}</Text>
+        <View>
+          <Text style={styles.get('headerTitle')}>{this.props.title}</Text>
 
-        {this.props.subtitle &&
-          <Text numberOfLines={1} style={subtitleStyles} adjustsFontSizeToFit={true}>
-            {this.props.subtitle}
-          </Text>
-        }
+          {this.props.subtitle &&
+            <Text numberOfLines={1} style={subtitleStyles} adjustsFontSizeToFit={true}>
+              {this.props.subtitle}
+            </Text>
+          }
+        </View>
+        <View style={styles.get('noteSwitchContainer')}>
+          <Button onPress={this.onPrev} title="<<"/>
+          <Button onPress={this.onNext} title=">>"/>
+        </View>
       </View>
     )
   }
@@ -37,8 +51,12 @@ export default class HeaderTitleView extends Component {
       headerContainer: {
         backgroundColor: StyleKit.variable("stylekitContrastBackgroundColor"),
         flex: 1,
-        justifyContent: 'flex-start',
-        flexDirection: "column"
+        justifyContent: 'space-between',
+        flexDirection: "row"
+      },
+
+      noteSwitchContainer: {
+        flexDirection: "row"
       },
 
       headerContainerAndroid: {
