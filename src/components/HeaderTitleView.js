@@ -19,10 +19,12 @@ export default class HeaderTitleView extends Component {
 
   renderNoteSwitcher() {
     if (this.props.showNoteSwitcher) {
-      return (<View style={this.getStyles().get('noteSwitchContainer')}>
-      <Button onPress={this.onPrev} title="<<"/>
-      <Button onPress={this.onNext} title=">>"/>
-      </View>);
+      return (
+        <View style={this.getStyles().get('noteSwitchContainer')}>
+          <View style={{marginRight:5}} ><Button onPress={this.onPrev} title="<<"/></View>
+          <View style={{marginLeft:5}} ><Button onPress={this.onNext} title=">>"/></View>
+        </View>
+        );
     }
   }
 
