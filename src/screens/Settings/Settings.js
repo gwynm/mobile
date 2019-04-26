@@ -43,6 +43,7 @@ export default class Settings extends Abstract {
     super(props);
 
     props.navigation.setParams({
+      showNoteSwitcher: false, 
       leftButton: {
         title: ApplicationState.isIOS ? "Done" : null,
         iconName: ApplicationState.isIOS ? null : StyleKit.nameForIcon("checkmark"),

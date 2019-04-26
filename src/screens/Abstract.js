@@ -23,6 +23,7 @@ export default class Abstract extends ThemedComponent {
     if(!templateOptions) { templateOptions = {}; }
     let options = {
       headerTitle:<HeaderTitleView
+        showNoteSwitcher={navigation.getParam("showNoteSwitcher") || false}
         title={navigation.getParam("title") || templateOptions.title}
         subtitle={navigation.getParam("subtitle") || templateOptions.subtitle}
         subtitleColor={navigation.getParam("subtitleColor")}

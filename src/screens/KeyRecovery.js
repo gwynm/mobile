@@ -30,6 +30,7 @@ export default class KeyRecovery extends Abstract {
     super(props);
 
     props.navigation.setParams({
+      showNoteSwitcher: false, 
       leftButton: {
         title: ApplicationState.isIOS ? "Cancel" : null,
         iconName: ApplicationState.isIOS ? null : StyleKit.nameForIcon("close"),

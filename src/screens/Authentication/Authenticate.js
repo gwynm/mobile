@@ -47,6 +47,7 @@ export default class Authenticate extends Abstract {
 
     if(this.getProp("hasCancelOption")) {
       props.navigation.setParams({
+        showNoteSwitcher: false, 
         leftButton: {
           title: ApplicationState.isIOS ? "Cancel" : null,
           iconName: ApplicationState.isIOS ? null : StyleKit.nameForIcon("close"),

@@ -199,6 +199,7 @@ export default class Compose extends Abstract {
 
   configureHeaderBar() {
     this.props.navigation.setParams({
+      showNoteSwitcher: true, 
       rightButton: {
         title: null,
         iconName: StyleKit.nameForIcon("menu"),
@@ -362,7 +363,6 @@ export default class Compose extends Abstract {
   }
 
   showSavingStatus() {
-    this.setSubTitle("");
   }
 
   showSavedStatus(success) {

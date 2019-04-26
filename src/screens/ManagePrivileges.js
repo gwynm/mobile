@@ -36,6 +36,7 @@ export default class ManagePrivileges extends Abstract {
     }
 
     props.navigation.setParams({
+      showNoteSwitcher: false, 
       leftButton: {
         title: ApplicationState.isIOS ? "Done" : null,
         iconName: ApplicationState.isIOS ? null : StyleKit.nameForIcon("checkmark"),

@@ -17,6 +17,15 @@ export default class HeaderTitleView extends Component {
     EventRegister.emit('actSwitchNote', 1);
   }
 
+  renderNoteSwitcher() {
+    if (this.props.showNoteSwitcher) {
+      return (<View style={this.getStyles().get('noteSwitchContainer')}>
+      <Button onPress={this.onPrev} title="<<"/>
+      <Button onPress={this.onNext} title=">>"/>
+      </View>);
+    }
+  }
+
   render() {
     let styles = this.getStyles();
 
@@ -38,10 +47,7 @@ export default class HeaderTitleView extends Component {
             </Text>
           }
         </View>
-        <View style={styles.get('noteSwitchContainer')}>
-          <Button onPress={this.onPrev} title="<<"/>
-          <Button onPress={this.onNext} title=">>"/>
-        </View>
+        {this.renderNoteSwitcher()}
       </View>
     )
   }

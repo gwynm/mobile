@@ -26,6 +26,7 @@ export default class InputModal extends Abstract {
     super(props);
 
     props.navigation.setParams({
+      showNoteSwitcher: false, 
       leftButton: {
         title: ApplicationState.isIOS ? "Cancel" : null,
         iconName: ApplicationState.isIOS ? null : StyleKit.nameForIcon("close"),

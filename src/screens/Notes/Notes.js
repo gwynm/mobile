@@ -34,6 +34,7 @@ export default class Notes extends Abstract {
     this.registerObservers();
 
     props.navigation.setParams({
+      showNoteSwitcher: false, 
       title: "All entries",
       leftButton: {
         title: null,
