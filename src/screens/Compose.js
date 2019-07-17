@@ -194,7 +194,7 @@ export default class Compose extends Abstract {
 
   defaultNoteTitle() {
     var d = new Date();
-    return d.getFullYear() + "-" + d.getMonth().pad(2) + "-" + d.getDate().pad(2) + " ";
+    return d.getFullYear() + "-" + (d.getMonth() + 1).pad(2) + "-" + d.getDate().pad(2) + " ";
   }
 
   configureHeaderBar() {
@@ -551,7 +551,7 @@ export default class Compose extends Abstract {
 
         {!shouldDisplayEditor && Platform.OS == "android" &&
             <View style={[this.styles.noteTextContainer]}>
-              <TextView style={[StyleKit.stylesForKey("noteText"), this.styles.textContentAndroid]}
+              <TextView style={[StyleKit.stylesForKey("noteText"), this.styles.textContentAndroid, {fontSize: 32}]}
                 ref={(ref) => this.input = ref}
                 autoFocus={this.note.dummy}
                 value={this.note.text}
@@ -672,6 +672,7 @@ export default class Compose extends Abstract {
       textContentAndroid: {
         flexGrow: 1,
         flex: 1,
+        fontSize: 28
       },
 
       contentContainer: {
